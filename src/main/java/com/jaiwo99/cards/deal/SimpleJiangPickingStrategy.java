@@ -1,6 +1,7 @@
 package com.jaiwo99.cards.deal;
 
 import com.jaiwo99.cards.domain.Jiang;
+import com.jaiwo99.cards.domain.JiangPicking;
 import com.jaiwo99.cards.repository.JiangPickingRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class SimpleJiangPickingStrategy extends AbstractJiangPickingStrategy {
             logger.info("Expecting {} Jiang cards, but only {} left", getJiangPickingCount(), list.size());
             return Collections.emptyList();
         }
-        return shuffle(list).subList(0, getJiangPickingCount() - 1);
+        return shuffle(list).subList(0, getJiangPickingCount());
     }
 
     @Override
@@ -44,7 +45,7 @@ public class SimpleJiangPickingStrategy extends AbstractJiangPickingStrategy {
 
     @Override
     public List<Jiang> list() {
-        final List<String> picked = jiangPickingRepository.findAll().stream().map(x -> x.getJiang()).collect(Collectors.toList());
+        final List<String> picked = jiangPickingRepository.findAll().stream().map(JiangPicking::getJiang).collect(Collectors.toList());
         return jiangRepository.findAll().stream().filter(x -> !picked.contains(x.getId())).collect(Collectors.toList());
     }
 }
