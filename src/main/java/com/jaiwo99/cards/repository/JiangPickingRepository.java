@@ -8,4 +8,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
  */
 public interface JiangPickingRepository extends MongoRepository<JiangPicking, String> {
 
+    JiangPicking findByJiang(String jiang);
 }
