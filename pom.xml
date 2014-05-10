@@ -49,6 +49,25 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.jayway.jsonpath</groupId>
+            <artifactId>json-path</artifactId>
+            <version>${jsonpath.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>${jackson.asl.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -65,6 +84,9 @@
         <guava.version>17.0</guava.version>
         <commons.lang3.version>3.3.2</commons.lang3.version>
         <embed.mongo.version>1.45</embed.mongo.version>
+        <gson.version>2.2.4</gson.version>
+        <jsonpath.version>0.9.1</jsonpath.version>
+        <jackson.asl.version>1.9.13</jackson.asl.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>

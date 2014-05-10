@@ -25,7 +25,4 @@ public class AppTestConfig {
     public Mongo mongo() throws UnknownHostException {
         return new MongoClient(mongodbHost, Integer.valueOf(mongodbPort));
     }
-
-
-
 }
