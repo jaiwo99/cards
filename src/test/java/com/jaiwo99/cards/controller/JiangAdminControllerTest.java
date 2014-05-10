@@ -18,6 +18,7 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.CoreMatchers.nullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
@@ -98,19 +99,12 @@ public class JiangAdminControllerTest extends AbstractControllerTest {
         generateJiang(10);
         final Jiang jiang = generateJiang();
 
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/admin/jiang/listAll"), String.class);
-
-        List<String> payload = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
-
-        assertThat(payload.size(), is(11));
+        assertThat(jiangRepository.findAll().size(), is(11));
 
         restTemplate.postForEntity(urlWrapper("/admin/jiang/remove/"+jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
-        final ResponseEntity<String> newResponseEntity = restTemplate.getForEntity(urlWrapper("/admin/jiang/listAll"), String.class);
-
-        List<String> payloadAfter = JsonPath.read(newResponseEntity.getBody(), "$.payload[*]");
-
-        assertThat(payloadAfter.size(), is(10));
+        assertThat(jiangRepository.findAll().size(), is(10));
+        assertThat(jiangRepository.findOne(jiang.getId()), is(nullValue()));
     }
 
 }
