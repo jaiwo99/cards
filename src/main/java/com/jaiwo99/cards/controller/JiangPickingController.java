@@ -1,14 +1,12 @@
 package com.jaiwo99.cards.controller;
 
-import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.domain.JiangPicking;
 import com.jaiwo99.cards.service.JiangPickingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.http.MediaType.*;
+import static com.jaiwo99.cards.controller.ResponseWrapper.getInstance;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
  * @author liang - jaiwo99@gmail.com
@@ -20,30 +18,30 @@ public class JiangPickingController {
     @Autowired
     private JiangPickingService jiangPickingService;
 
-    @RequestMapping(value = "/reset", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/reset", method = RequestMethod.POST)
     public @ResponseBody
-    List<Jiang> reset() {
+    ResponseWrapper reset() {
         jiangPickingService.reset();
         return listRest();
     }
 
     @RequestMapping(value = "/listRest", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Jiang> listRest() {
-        return jiangPickingService.listRest();
+    public @ResponseBody ResponseWrapper listRest() {
+        return getInstance(HttpStatus.OK.value(), jiangPickingService.listRest());
     }
 
     @RequestMapping(value = "/listPicked", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody List<JiangPicking> listPicked() {
-        return jiangPickingService.listPicked();
+    public @ResponseBody ResponseWrapper listPicked() {
+        return getInstance(HttpStatus.OK.value(), jiangPickingService.listPicked());
     }
 
     @RequestMapping(value = "/choose", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody List<Jiang> choose() {
-        return jiangPickingService.choose();
+    public @ResponseBody ResponseWrapper choose() {
+        return getInstance(HttpStatus.OK.value(), jiangPickingService.choose());
     }
 
     @RequestMapping(value = "/pick/{id}", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody Jiang pick(@PathVariable String id) {
-        return jiangPickingService.pick(id);
+    public @ResponseBody ResponseWrapper pick(@PathVariable String id) {
+        return getInstance(HttpStatus.OK.value(), jiangPickingService.pick(id));
     }
 }
