@@ -1,4 +1,4 @@
-package com.jaiwo99.cards.rest.controller;
+package com.jaiwo99.cards.rest.api;
 
 import com.google.gson.Gson;
 import com.jaiwo99.cards.AbstractControllerTest;

@@ -1,4 +1,4 @@
-package com.jaiwo99.cards.rest.controller;
+package com.jaiwo99.cards.rest.api;
 
 import com.jaiwo99.cards.AbstractControllerTest;
 import com.jaiwo99.cards.domain.CardDeal;
