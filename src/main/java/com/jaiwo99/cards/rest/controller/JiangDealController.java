@@ -40,7 +40,7 @@ public class JiangDealController {
         return getInstance(HttpStatus.OK.value(), jiangDealService.listPicked());
     }
 
-    @RequestMapping(value = "/choose", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/choose", method = RequestMethod.POST, produces = APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseWrapper choose() {
         return getInstance(HttpStatus.OK.value(), jiangDealService.choose());
     }

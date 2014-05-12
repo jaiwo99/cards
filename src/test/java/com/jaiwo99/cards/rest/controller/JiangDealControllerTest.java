@@ -5,7 +5,6 @@ import com.jaiwo99.cards.domain.CardDeal;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
-import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,7 +15,9 @@ import org.springframework.web.client.RestTemplate;
 import java.util.List;
 
 import static com.jaiwo99.cards.deal.CardStatus.PICKED;
+import static com.jayway.jsonpath.JsonPath.read;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
@@ -56,7 +57,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listNew"), String.class);
 
-        final List<Jiang> jiangList = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
+        final List<Jiang> jiangList = read(responseEntity.getBody(), "$.payload[*]");
 
         assertThat(jiangList.size(), is(11));
 
@@ -64,9 +65,49 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listNew"), String.class);
 
-        final List<Jiang> jiangListAfterPicking = JsonPath.read(responseEntityAfterPicking.getBody(), "$.payload[*]");
+        final List<Jiang> jiangListAfterPicking = read(responseEntityAfterPicking.getBody(), "$.payload[*]");
 
         assertThat(jiangListAfterPicking.size(), is(10));
+    }
+
+    @Test
+    public void listChosen_should_not_list_picked_jiang() throws Exception {
+        final Jiang jiangToBePicked = generateJiang();
+
+        assertThat(jiangRepository.findAll().size(), is(1));
+
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listChosen"), String.class);
+
+        final List<Jiang> jiangList = read(responseEntity.getBody(), "$.payload[*]");
+
+        assertThat(jiangList.size(), is(0));
+
+        restTemplate.postForEntity(urlWrapper("/jiang/pick/"+ jiangToBePicked.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
+
+        final ResponseEntity<String> responseEntityAfterPick = restTemplate.getForEntity(urlWrapper("/jiang/listChosen"), String.class);
+
+        final List<Jiang> jiangListAfterPick = read(responseEntityAfterPick.getBody(), "$.payload[*]");
+
+        assertThat(jiangListAfterPick.size(), is(0));
+    }
+
+    @Test
+    public void listChosen_should_list_chosen_jiang() throws Exception {
+        generateJiang(10);
+
+        final ResponseEntity<String> chooseEntity = restTemplate.postForEntity(urlWrapper("/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
+
+        final List<Jiang> chosenList = read(chooseEntity.getBody(), "$.payload[*]");
+
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listChosen"), String.class);
+
+        final List<Jiang> jiangList = read(responseEntity.getBody(), "$.payload[*]");
+
+        assertThat(jiangList.size(), is(Integer.valueOf(chooseCount)));
+
+        assertThat(jiangList.size(), equalTo(chosenList.size()));
+
+        assertThat(jiangList.containsAll(chosenList), is(true));
     }
 
     @Test
@@ -80,7 +121,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listPicked"), String.class);
 
-        final List<Jiang> jiangListAfterPicking = JsonPath.read(responseEntityAfterPicking.getBody(), "$.payload[*]");
+        final List<Jiang> jiangListAfterPicking = read(responseEntityAfterPicking.getBody(), "$.payload[*]");
 
         assertThat(jiangListAfterPicking.size(), is(1));
     }
@@ -89,9 +130,9 @@ public class JiangDealControllerTest extends AbstractControllerTest {
     public void choose_should_return_defined_count_of_jiang() throws Exception {
         generateJiang(10);
 
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/choose"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.postForEntity(urlWrapper("/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
-        final List<Jiang> jiangListAfterPicking = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
+        final List<Jiang> jiangListAfterPicking = read(responseEntity.getBody(), "$.payload[*]");
 
         assertThat(jiangListAfterPicking.size(), is(Integer.valueOf(chooseCount)));
     }
