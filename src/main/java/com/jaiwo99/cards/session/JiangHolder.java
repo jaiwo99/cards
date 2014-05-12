@@ -1,4 +1,4 @@
-package com.jaiwo99.cards.deal;
+package com.jaiwo99.cards.session;
 
 import com.jaiwo99.cards.domain.Jiang;
 
@@ -14,4 +14,10 @@ public interface JiangHolder {
     Jiang getMinor();
 
     List<Jiang> getSelection();
+
+    void setMajor(Jiang major);
+
+    void setMinor(Jiang minor);
+
+    void setSelection(List<Jiang> selection);
 }
