@@ -1,6 +1,5 @@
-package com.jaiwo99.cards.controller;
+package com.jaiwo99.cards;
 
-import com.jaiwo99.cards.Application;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.JiangPickingRepository;
 import com.jaiwo99.cards.repository.JiangRepository;

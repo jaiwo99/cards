@@ -1,5 +1,6 @@
-package com.jaiwo99.cards.controller;
+package com.jaiwo99.cards.rest.controller;
 
+import com.jaiwo99.cards.AbstractControllerTest;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.domain.JiangPicking;
 import com.jaiwo99.cards.repository.JiangPickingRepository;
@@ -18,7 +19,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class JiangPickingControllerTest extends AbstractControllerTest {
+public class JiangDealControllerTest extends AbstractControllerTest {
 
     @Autowired
     private RestTemplate restTemplate;
@@ -104,6 +105,6 @@ public class JiangPickingControllerTest extends AbstractControllerTest {
         restTemplate.postForEntity(urlWrapper("/jiang/pick/" + jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
         assertThat(jiangPickingRepository.findAll().size(), is(1));
-        assertThat(jiangPickingRepository.findByJiang(jiang.getId()), is(notNullValue()));
+        assertThat(jiangPickingRepository.findByCard(jiang.getId()), is(notNullValue()));
     }
 }

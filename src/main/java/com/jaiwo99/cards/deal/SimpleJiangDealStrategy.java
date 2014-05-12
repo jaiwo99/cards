@@ -1,7 +1,7 @@
 package com.jaiwo99.cards.deal;
 
+import com.jaiwo99.cards.domain.CardDeal;
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.domain.JiangPicking;
 import com.jaiwo99.cards.repository.JiangPickingRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import org.slf4j.Logger;
@@ -17,9 +17,9 @@ import java.util.stream.Collectors;
  * @author liang - jaiwo99@gmail.com
  */
 @Component
-public class SimpleJiangPickingStrategy extends AbstractJiangPickingStrategy {
+public class SimpleJiangDealStrategy extends AbstractJiangDealStrategy {
 
-    private static final Logger logger = LoggerFactory.getLogger(SimpleJiangPickingStrategy.class);
+    private static final Logger logger = LoggerFactory.getLogger(SimpleJiangDealStrategy.class);
 
     @Autowired
     private JiangRepository jiangRepository;
@@ -45,7 +45,7 @@ public class SimpleJiangPickingStrategy extends AbstractJiangPickingStrategy {
 
     @Override
     public List<Jiang> list() {
-        final List<String> picked = jiangPickingRepository.findAll().stream().map(JiangPicking::getJiang).collect(Collectors.toList());
+        final List<String> picked = jiangPickingRepository.findAll().stream().map(CardDeal::getCard).collect(Collectors.toList());
         return jiangRepository.findAll().stream().filter(x -> !picked.contains(x.getId())).collect(Collectors.toList());
     }
 }

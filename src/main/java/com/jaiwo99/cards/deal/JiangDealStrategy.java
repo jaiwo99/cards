@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author liang - jaiwo99@gmail.com
  */
-public interface JiangPickingStrategy {
+public interface JiangDealStrategy {
 
     void reset();
 

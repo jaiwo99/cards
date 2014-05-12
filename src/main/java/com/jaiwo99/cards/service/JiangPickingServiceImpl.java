@@ -1,6 +1,6 @@
 package com.jaiwo99.cards.service;
 
-import com.jaiwo99.cards.deal.JiangPickingStrategy;
+import com.jaiwo99.cards.deal.JiangDealStrategy;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.domain.JiangPicking;
 import com.jaiwo99.cards.repository.JiangPickingRepository;
@@ -19,21 +19,21 @@ public class JiangPickingServiceImpl implements JiangPickingService {
     private JiangPickingRepository jiangPickingRepository;
 
     @Autowired
-    private JiangPickingStrategy jiangPickingStrategy;
+    private JiangDealStrategy jiangDealStrategy;
 
     @Override
     public List<Jiang> listRest() {
-        return jiangPickingStrategy.list();
+        return jiangDealStrategy.list();
     }
 
     @Override
     public List<Jiang> choose() {
-        return jiangPickingStrategy.choose();
+        return jiangDealStrategy.choose();
     }
 
     @Override
     public Jiang pick(String id) {
-        return jiangPickingStrategy.pick(id);
+        return jiangDealStrategy.pick(id);
     }
 
     @Override
@@ -43,6 +43,6 @@ public class JiangPickingServiceImpl implements JiangPickingService {
 
     @Override
     public void reset() {
-        jiangPickingStrategy.reset();
+        jiangDealStrategy.reset();
     }
 }

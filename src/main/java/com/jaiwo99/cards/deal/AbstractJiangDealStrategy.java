@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 /**
  * @author liang - jaiwo99@gmail.com
  */
-public abstract class AbstractJiangPickingStrategy implements JiangPickingStrategy {
+public abstract class AbstractJiangDealStrategy implements JiangDealStrategy {
 
     @Autowired
     private JiangRepository jiangRepository;

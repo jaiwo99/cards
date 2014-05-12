@@ -1,4 +1,4 @@
-package com.jaiwo99.cards.controller;
+package com.jaiwo99.cards.rest.controller;
 
 /**
  * @author liang - jaiwo99@gmail.com

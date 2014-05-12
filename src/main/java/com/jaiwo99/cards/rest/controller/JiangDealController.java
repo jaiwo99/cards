@@ -1,11 +1,11 @@
-package com.jaiwo99.cards.controller;
+package com.jaiwo99.cards.rest.controller;
 
 import com.jaiwo99.cards.service.JiangPickingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import static com.jaiwo99.cards.controller.ResponseWrapper.getInstance;
+import static com.jaiwo99.cards.rest.controller.ResponseWrapper.getInstance;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 /**
@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 @RestController
 @RequestMapping("/jiang")
-public class JiangPickingController {
+public class JiangDealController {
 
     @Autowired
     private JiangPickingService jiangPickingService;

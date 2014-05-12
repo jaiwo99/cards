@@ -1,6 +1,7 @@
-package com.jaiwo99.cards.controller;
+package com.jaiwo99.cards.rest.controller;
 
 import com.google.gson.Gson;
+import com.jaiwo99.cards.AbstractControllerTest;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.JiangRepository;
 import com.jayway.jsonpath.JsonPath;
@@ -16,9 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**

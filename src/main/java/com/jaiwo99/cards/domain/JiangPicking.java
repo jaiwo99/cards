@@ -8,24 +8,14 @@ import java.io.Serializable;
  * @author liang - jaiwo99@gmail.com
  */
 @Document(collection = "jiang_picking")
-public class JiangPicking extends Picking implements Serializable {
+public class JiangPicking extends CardDeal implements Serializable {
 
     private static final long serialVersionUID = 2l;
 
-    private String jiang;
-
-    public JiangPicking() {}
-
-    public JiangPicking(String jiang) {
-        this.jiang = jiang;
+    public JiangPicking() {
     }
 
-
-    public String getJiang() {
-        return jiang;
-    }
-
-    public void setJiang(String jiang) {
-        this.jiang = jiang;
+    public JiangPicking(String card) {
+        super(card);
     }
 }
