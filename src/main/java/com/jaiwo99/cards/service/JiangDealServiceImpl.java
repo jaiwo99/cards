@@ -13,7 +13,7 @@ import java.util.List;
  * @author liang - jaiwo99@gmail.com
  */
 @Service
-public class JiangPickingServiceImpl implements JiangPickingService {
+public class JiangDealServiceImpl implements JiangDealService {
 
     @Autowired
     private JiangPickingRepository jiangPickingRepository;
