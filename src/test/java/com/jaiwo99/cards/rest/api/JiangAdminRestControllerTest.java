@@ -23,9 +23,9 @@ import static org.hamcrest.MatcherAssert.assertThat;
 /**
  * @author liang - jaiwo99@gmail.com
  */
-public class JiangAdminControllerTest extends AbstractControllerTest {
+public class JiangAdminRestControllerTest extends AbstractControllerTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(JiangAdminControllerTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(JiangAdminRestControllerTest.class);
 
     @Autowired
     private RestTemplate restTemplate;

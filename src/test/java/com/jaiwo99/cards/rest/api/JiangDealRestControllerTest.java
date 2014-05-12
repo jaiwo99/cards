@@ -21,7 +21,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
 
-public class JiangDealControllerTest extends AbstractControllerTest {
+public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Autowired
     private RestTemplate restTemplate;

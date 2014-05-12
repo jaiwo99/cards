@@ -14,7 +14,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 @RestController
 @RequestMapping("/rest/admin/jiang")
-public class JiangAdminController {
+public class JiangAdminRestController {
 
     @Autowired
     private JiangAdminService jiangAdminService;

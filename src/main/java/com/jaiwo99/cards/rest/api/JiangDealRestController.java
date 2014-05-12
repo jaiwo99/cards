@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 @RestController
 @RequestMapping("/rest/jiang")
-public class JiangDealController {
+public class JiangDealRestController {
 
     @Autowired
     private JiangDealService jiangDealService;
