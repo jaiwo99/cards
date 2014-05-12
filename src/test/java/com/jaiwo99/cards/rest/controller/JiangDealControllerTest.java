@@ -14,7 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
-import static com.jaiwo99.cards.deal.CardStatus.PICKED;
+import static com.jaiwo99.cards.domain.CardStatus.PICKED;
 import static com.jayway.jsonpath.JsonPath.read;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;

@@ -1,4 +1,4 @@
-package com.jaiwo99.cards.deal;
+package com.jaiwo99.cards.domain;
 
 /**
  * @author liang - jaiwo99@gmail.com

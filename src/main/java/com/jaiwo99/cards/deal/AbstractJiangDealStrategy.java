@@ -7,7 +7,7 @@ import com.jaiwo99.cards.repository.JiangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
-import static com.jaiwo99.cards.deal.CardStatus.PICKED;
+import static com.jaiwo99.cards.domain.CardStatus.PICKED;
 
 /**
  * @author liang - jaiwo99@gmail.com

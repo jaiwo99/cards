@@ -4,16 +4,13 @@ import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import org.junit.After;
-import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.IntegrationTest;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Arrays;
@@ -22,11 +19,9 @@ import java.util.UUID;
 /**
  * @author liang - jaiwo99@gmail.com
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @IntegrationTest
-public abstract class AbstractControllerTest {
+public abstract class AbstractControllerTest extends AbstractTest {
 
     private static final Logger logger = LoggerFactory.getLogger(AbstractControllerTest.class);
 

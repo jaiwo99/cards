@@ -1,6 +1,6 @@
 package com.jaiwo99.cards.repository;
 
-import com.jaiwo99.cards.deal.CardStatus;
+import com.jaiwo99.cards.domain.CardStatus;
 import com.jaiwo99.cards.domain.CardDeal;
 import org.springframework.data.mongodb.repository.MongoRepository;
 

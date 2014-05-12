@@ -1,6 +1,7 @@
 package com.jaiwo99.cards.deal;
 
 import com.jaiwo99.cards.domain.CardDeal;
+import com.jaiwo99.cards.domain.CardStatus;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Collections;
 import java.util.List;
 
-import static com.jaiwo99.cards.deal.CardStatus.*;
+import static com.jaiwo99.cards.domain.CardStatus.*;
 import static java.util.stream.Collectors.toList;
 
 /**

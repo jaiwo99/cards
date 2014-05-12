@@ -1,6 +1,5 @@
 package com.jaiwo99.cards.domain;
 
-import com.jaiwo99.cards.deal.CardStatus;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
