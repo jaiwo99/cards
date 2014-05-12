@@ -13,7 +13,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  * @author liang - jaiwo99@gmail.com
  */
 @RestController
-@RequestMapping("/admin/jiang")
+@RequestMapping("/rest/admin/jiang")
 public class JiangAdminController {
 
     @Autowired

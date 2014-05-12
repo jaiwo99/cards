@@ -43,7 +43,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         assertThat(cardDealRepository.findAll().size(), is(1));
 
-        restTemplate.postForEntity(urlWrapper("/jiang/reset"), new HttpEntity<Void>(null, jsonHeader()), String.class);
+        restTemplate.postForEntity(urlWrapper("/rest/jiang/reset"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
         assertThat(cardDealRepository.findAll().size(), is(0));
     }
@@ -55,7 +55,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         assertThat(jiangRepository.findAll().size(), is(11));
 
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listNew"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/rest/jiang/listNew"), String.class);
 
         final List<Jiang> jiangList = read(responseEntity.getBody(), "$.payload[*]");
 
@@ -63,7 +63,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         cardDealRepository.save(new CardDeal(jiang.getId(), PICKED));
 
-        final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listNew"), String.class);
+        final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/rest/jiang/listNew"), String.class);
 
         final List<Jiang> jiangListAfterPicking = read(responseEntityAfterPicking.getBody(), "$.payload[*]");
 
@@ -76,15 +76,15 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         assertThat(jiangRepository.findAll().size(), is(1));
 
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listChosen"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/rest/jiang/listChosen"), String.class);
 
         final List<Jiang> jiangList = read(responseEntity.getBody(), "$.payload[*]");
 
         assertThat(jiangList.size(), is(0));
 
-        restTemplate.postForEntity(urlWrapper("/jiang/pick/"+ jiangToBePicked.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
+        restTemplate.postForEntity(urlWrapper("/rest/jiang/pick/"+ jiangToBePicked.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
-        final ResponseEntity<String> responseEntityAfterPick = restTemplate.getForEntity(urlWrapper("/jiang/listChosen"), String.class);
+        final ResponseEntity<String> responseEntityAfterPick = restTemplate.getForEntity(urlWrapper("/rest/jiang/listChosen"), String.class);
 
         final List<Jiang> jiangListAfterPick = read(responseEntityAfterPick.getBody(), "$.payload[*]");
 
@@ -95,11 +95,11 @@ public class JiangDealControllerTest extends AbstractControllerTest {
     public void listChosen_should_list_chosen_jiang() throws Exception {
         generateJiang(10);
 
-        final ResponseEntity<String> chooseEntity = restTemplate.postForEntity(urlWrapper("/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
+        final ResponseEntity<String> chooseEntity = restTemplate.postForEntity(urlWrapper("/rest/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
         final List<Jiang> chosenList = read(chooseEntity.getBody(), "$.payload[*]");
 
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listChosen"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/rest/jiang/listChosen"), String.class);
 
         final List<Jiang> jiangList = read(responseEntity.getBody(), "$.payload[*]");
 
@@ -119,7 +119,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         cardDealRepository.save(new CardDeal(jiang.getId(), PICKED));
 
-        final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listPicked"), String.class);
+        final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/rest/jiang/listPicked"), String.class);
 
         final List<Jiang> jiangListAfterPicking = read(responseEntityAfterPicking.getBody(), "$.payload[*]");
 
@@ -130,7 +130,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
     public void choose_should_return_defined_count_of_jiang() throws Exception {
         generateJiang(10);
 
-        final ResponseEntity<String> responseEntity = restTemplate.postForEntity(urlWrapper("/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.postForEntity(urlWrapper("/rest/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
         final List<Jiang> jiangListAfterPicking = read(responseEntity.getBody(), "$.payload[*]");
 
@@ -144,7 +144,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
 
         assertThat(cardDealRepository.findAll().size(), is(0));
 
-        restTemplate.postForEntity(urlWrapper("/jiang/pick/" + jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
+        restTemplate.postForEntity(urlWrapper("/rest/jiang/pick/" + jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
         assertThat(cardDealRepository.findAll().size(), is(1));
         assertThat(cardDealRepository.findByCard(jiang.getId()), is(notNullValue()));

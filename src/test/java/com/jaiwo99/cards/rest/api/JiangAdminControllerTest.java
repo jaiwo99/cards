@@ -39,7 +39,7 @@ public class JiangAdminControllerTest extends AbstractControllerTest {
     @Test
     public void list_should_list_all_jiang() throws Exception {
         generateJiang(10);
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/admin/jiang/list"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/rest/admin/jiang/list"), String.class);
 
         List<String> payload = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
 
@@ -55,7 +55,7 @@ public class JiangAdminControllerTest extends AbstractControllerTest {
 
         logger.debug("Json string of request: {}", jsonString);
 
-        final ResponseEntity<String> responseEntity = restTemplate.exchange(urlWrapper("/admin/jiang/save"), HttpMethod.POST, new HttpEntity<>(jsonString, jsonHeader()), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.exchange(urlWrapper("/rest/admin/jiang/save"), HttpMethod.POST, new HttpEntity<>(jsonString, jsonHeader()), String.class);
 
         logger.debug("Response Body: {}", responseEntity.getBody());
 
@@ -79,7 +79,7 @@ public class JiangAdminControllerTest extends AbstractControllerTest {
 
         logger.debug("Json string of request: {}", jsonString);
 
-        final ResponseEntity<String> responseEntity = restTemplate.exchange(urlWrapper("/admin/jiang/save"), HttpMethod.POST, new HttpEntity<>(jsonString, jsonHeader()), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.exchange(urlWrapper("/rest/admin/jiang/save"), HttpMethod.POST, new HttpEntity<>(jsonString, jsonHeader()), String.class);
 
         logger.debug("Response Body: {}", responseEntity.getBody());
 
@@ -100,7 +100,7 @@ public class JiangAdminControllerTest extends AbstractControllerTest {
 
         assertThat(jiangRepository.findAll().size(), is(11));
 
-        restTemplate.postForEntity(urlWrapper("/admin/jiang/remove/"+jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
+        restTemplate.postForEntity(urlWrapper("/rest/admin/jiang/remove/"+jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
         assertThat(jiangRepository.findAll().size(), is(10));
         assertThat(jiangRepository.findOne(jiang.getId()), is(nullValue()));
