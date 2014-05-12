@@ -1,11 +1,13 @@
 package com.jaiwo99.cards.deal;
 
+import com.jaiwo99.cards.domain.CardDeal;
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.domain.JiangPicking;
-import com.jaiwo99.cards.repository.JiangPickingRepository;
+import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+
+import static com.jaiwo99.cards.deal.CardStatus.PICKED;
 
 /**
  * @author liang - jaiwo99@gmail.com
@@ -16,24 +18,19 @@ public abstract class AbstractJiangDealStrategy implements JiangDealStrategy {
     private JiangRepository jiangRepository;
 
     @Autowired
-    private JiangPickingRepository jiangPickingRepository;
+    private CardDealRepository cardDealRepository;
 
     @Value("${jiang.picking.count}")
-    private int jiangPickingCount;
+    protected int jiangPickingCount;
 
     @Override
     public void reset() {
-        jiangPickingRepository.deleteAll();
+        cardDealRepository.deleteAll();
     }
 
     @Override
     public Jiang pick(String id) {
-        jiangPickingRepository.save(new JiangPicking(id));
+        cardDealRepository.save(new CardDeal(id, PICKED));
         return jiangRepository.findOne(id);
     }
-
-    protected int getJiangPickingCount() {
-        return jiangPickingCount;
-    }
-
 }

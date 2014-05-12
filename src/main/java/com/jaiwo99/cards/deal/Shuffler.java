@@ -7,6 +7,7 @@ import java.util.List;
 /**
  * @author liang - jaiwo99@gmail.com
  */
+@FunctionalInterface
 public interface Shuffler<T extends Card> {
 
     List<T> shuffle(List<T> cards);

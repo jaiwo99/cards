@@ -22,12 +22,17 @@ public class JiangDealController {
     public @ResponseBody
     ResponseWrapper reset() {
         jiangDealService.reset();
-        return listRest();
+        return listNew();
     }
 
-    @RequestMapping(value = "/listRest", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseWrapper listRest() {
-        return getInstance(HttpStatus.OK.value(), jiangDealService.listRest());
+    @RequestMapping(value = "/listNew", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseWrapper listNew() {
+        return getInstance(HttpStatus.OK.value(), jiangDealService.listNew());
+    }
+
+    @RequestMapping(value = "/listChosen", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseWrapper listChosen() {
+        return getInstance(HttpStatus.OK.value(), jiangDealService.listChosen());
     }
 
     @RequestMapping(value = "/listPicked", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)

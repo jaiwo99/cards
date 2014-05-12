@@ -19,10 +19,10 @@ public class JiangAdminController {
     @Autowired
     private JiangAdminService jiangAdminService;
 
-    @RequestMapping(value = "/listAll", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/list", method = RequestMethod.GET, produces = APPLICATION_JSON_VALUE)
     public @ResponseBody
-    ResponseWrapper listAll() {
-        return getInstance(HttpStatus.OK.value(), jiangAdminService.listAll());
+    ResponseWrapper list() {
+        return getInstance(HttpStatus.OK.value(), jiangAdminService.list());
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -35,6 +35,6 @@ public class JiangAdminController {
     public @ResponseBody
     ResponseWrapper remove(@PathVariable String id) {
         jiangAdminService.remove(id);
-        return listAll();
+        return list();
     }
 }

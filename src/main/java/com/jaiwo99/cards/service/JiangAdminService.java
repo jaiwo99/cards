@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface JiangAdminService {
 
-    List<Jiang> listAll();
+    List<Jiang> list();
 
     Jiang save(Jiang jiang);
 

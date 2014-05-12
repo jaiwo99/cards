@@ -17,7 +17,7 @@ public class JiangAdminServiceImpl implements JiangAdminService {
     private JiangRepository jiangRepository;
 
     @Override
-    public List<Jiang> listAll() {
+    public List<Jiang> list() {
         return jiangRepository.findAll();
     }
 

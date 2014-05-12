@@ -1,17 +1,28 @@
 package com.jaiwo99.cards.domain;
 
+import com.jaiwo99.cards.deal.CardStatus;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.io.Serializable;
+
 /**
  * @author liang - jaiwo99@gmail.com
  */
-public abstract class CardDeal extends BaseEntity {
+@Document(collection = "card_deal")
+public class CardDeal extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 2l;
 
     private String card;
 
-    protected CardDeal() {
+    private CardStatus status;
+
+    public CardDeal() {
     }
 
-    protected CardDeal(String card) {
+    public CardDeal(String card, CardStatus status) {
         this.card = card;
+        this.status = status;
     }
 
     public String getCard() {
@@ -20,5 +31,13 @@ public abstract class CardDeal extends BaseEntity {
 
     public void setCard(String card) {
         this.card = card;
+    }
+
+    public CardStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(CardStatus status) {
+        this.status = status;
     }
 }

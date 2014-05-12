@@ -3,7 +3,7 @@ package com.jaiwo99.cards.rest.controller;
 /**
  * @author liang - jaiwo99@gmail.com
  */
-public class ResponseWrapper<T> {
+public final class ResponseWrapper<T> {
 
     private final int httpStatus;
 

@@ -1,7 +1,6 @@
 package com.jaiwo99.cards.service;
 
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.domain.JiangPicking;
 
 import java.util.List;
 
@@ -10,13 +9,15 @@ import java.util.List;
  */
 public interface JiangDealService {
 
-    List<Jiang> listRest();
-
     List<Jiang> choose();
 
     Jiang pick(String id);
 
-    List<JiangPicking> listPicked();
+    List<Jiang> listNew();
+
+    List<Jiang> listChosen();
+
+    List<Jiang> listPicked();
 
     void reset();
 }

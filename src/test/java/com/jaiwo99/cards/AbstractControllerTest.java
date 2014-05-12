@@ -1,7 +1,7 @@
 package com.jaiwo99.cards;
 
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.repository.JiangPickingRepository;
+import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import org.junit.After;
 import org.junit.runner.RunWith;
@@ -34,7 +34,7 @@ public abstract class AbstractControllerTest {
     private JiangRepository jiangRepository;
 
     @Autowired
-    private JiangPickingRepository jiangPickingRepository;
+    private CardDealRepository cardDealRepository;
 
     @Value("${host.name}")
     private String host;
@@ -46,7 +46,7 @@ public abstract class AbstractControllerTest {
     public void cleanUp() throws Exception {
         logger.debug("Doing clean up job after test");
         jiangRepository.deleteAll();
-        jiangPickingRepository.deleteAll();
+        cardDealRepository.deleteAll();
     }
 
     protected void generateJiang(int count) {

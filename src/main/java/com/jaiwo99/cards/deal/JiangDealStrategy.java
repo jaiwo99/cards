@@ -15,7 +15,9 @@ public interface JiangDealStrategy {
 
     List<Jiang> choose();
 
-    List<Jiang> shuffle(final List<Jiang> jiangList);
+    List<Jiang> listNew();
 
-    List<Jiang> list();
+    List<Jiang> listChosen();
+
+    List<Jiang> listPicked();
 }

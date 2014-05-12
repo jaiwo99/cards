@@ -2,8 +2,7 @@ package com.jaiwo99.cards.service;
 
 import com.jaiwo99.cards.deal.JiangDealStrategy;
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.domain.JiangPicking;
-import com.jaiwo99.cards.repository.JiangPickingRepository;
+import com.jaiwo99.cards.repository.CardDealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,15 +15,11 @@ import java.util.List;
 public class JiangDealServiceImpl implements JiangDealService {
 
     @Autowired
-    private JiangPickingRepository jiangPickingRepository;
-
-    @Autowired
     private JiangDealStrategy jiangDealStrategy;
 
-    @Override
-    public List<Jiang> listRest() {
-        return jiangDealStrategy.list();
-    }
+    @Autowired
+    private CardDealRepository cardDealRepository;
+
 
     @Override
     public List<Jiang> choose() {
@@ -37,8 +32,18 @@ public class JiangDealServiceImpl implements JiangDealService {
     }
 
     @Override
-    public List<JiangPicking> listPicked() {
-        return jiangPickingRepository.findAll();
+    public List<Jiang> listNew() {
+        return jiangDealStrategy.listNew();
+    }
+
+    @Override
+    public List<Jiang> listChosen() {
+        return jiangDealStrategy.listChosen();
+    }
+
+    @Override
+    public List<Jiang> listPicked() {
+        return jiangDealStrategy.listPicked();
     }
 
     @Override

@@ -1,9 +1,9 @@
 package com.jaiwo99.cards.rest.controller;
 
 import com.jaiwo99.cards.AbstractControllerTest;
+import com.jaiwo99.cards.domain.CardDeal;
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.domain.JiangPicking;
-import com.jaiwo99.cards.repository.JiangPickingRepository;
+import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
+import static com.jaiwo99.cards.deal.CardStatus.PICKED;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.notNullValue;
@@ -25,7 +26,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
     private RestTemplate restTemplate;
 
     @Autowired
-    private JiangPickingRepository jiangPickingRepository;
+    private CardDealRepository cardDealRepository;
 
     @Autowired
     private JiangRepository jiangRepository;
@@ -37,31 +38,31 @@ public class JiangDealControllerTest extends AbstractControllerTest {
     public void reset_should_remove_all_jiang_in_jiangPicking_repo() throws Exception {
         final Jiang jiang = generateJiang();
 
-        jiangPickingRepository.save(new JiangPicking(jiang.getId()));
+        cardDealRepository.save(new CardDeal(jiang.getId(), PICKED));
 
-        assertThat(jiangPickingRepository.findAll().size(), is(1));
+        assertThat(cardDealRepository.findAll().size(), is(1));
 
         restTemplate.postForEntity(urlWrapper("/jiang/reset"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
-        assertThat(jiangPickingRepository.findAll().size(), is(0));
+        assertThat(cardDealRepository.findAll().size(), is(0));
     }
 
     @Test
-    public void listRest_should_only_list_available_jiang() throws Exception {
+    public void listNew_should_only_list_available_jiang() throws Exception {
         generateJiang(10);
         final Jiang jiang = generateJiang();
 
         assertThat(jiangRepository.findAll().size(), is(11));
 
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listRest"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/jiang/listNew"), String.class);
 
         final List<Jiang> jiangList = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
 
         assertThat(jiangList.size(), is(11));
 
-        jiangPickingRepository.save(new JiangPicking(jiang.getId()));
+        cardDealRepository.save(new CardDeal(jiang.getId(), PICKED));
 
-        final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listRest"), String.class);
+        final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listNew"), String.class);
 
         final List<Jiang> jiangListAfterPicking = JsonPath.read(responseEntityAfterPicking.getBody(), "$.payload[*]");
 
@@ -73,9 +74,9 @@ public class JiangDealControllerTest extends AbstractControllerTest {
         final Jiang jiang = generateJiang();
 
         assertThat(jiangRepository.findAll().size(), is(1));
-        assertThat(jiangPickingRepository.findAll().size(), is(0));
+        assertThat(cardDealRepository.findAll().size(), is(0));
 
-        jiangPickingRepository.save(new JiangPicking(jiang.getId()));
+        cardDealRepository.save(new CardDeal(jiang.getId(), PICKED));
 
         final ResponseEntity<String> responseEntityAfterPicking = restTemplate.getForEntity(urlWrapper("/jiang/listPicked"), String.class);
 
@@ -100,11 +101,11 @@ public class JiangDealControllerTest extends AbstractControllerTest {
         generateJiang(10);
         final Jiang jiang = generateJiang();
 
-        assertThat(jiangPickingRepository.findAll().size(), is(0));
+        assertThat(cardDealRepository.findAll().size(), is(0));
 
         restTemplate.postForEntity(urlWrapper("/jiang/pick/" + jiang.getId()), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
-        assertThat(jiangPickingRepository.findAll().size(), is(1));
-        assertThat(jiangPickingRepository.findByCard(jiang.getId()), is(notNullValue()));
+        assertThat(cardDealRepository.findAll().size(), is(1));
+        assertThat(cardDealRepository.findByCard(jiang.getId()), is(notNullValue()));
     }
 }

@@ -37,9 +37,9 @@ public class JiangAdminControllerTest extends AbstractControllerTest {
     private JiangRepository jiangRepository;
 
     @Test
-    public void listAll_should_list_all_jiang() throws Exception {
+    public void list_should_list_all_jiang() throws Exception {
         generateJiang(10);
-        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/admin/jiang/listAll"), String.class);
+        final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/admin/jiang/list"), String.class);
 
         List<String> payload = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
 
