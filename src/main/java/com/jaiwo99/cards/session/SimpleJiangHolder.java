@@ -13,7 +13,7 @@ import java.util.List;
  * @author liang - jaiwo99@gmail.com
  */
 @Component
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
 public class SimpleJiangHolder implements JiangHolder, Serializable {
 
     private static final long serialVersionUID = 1l;
