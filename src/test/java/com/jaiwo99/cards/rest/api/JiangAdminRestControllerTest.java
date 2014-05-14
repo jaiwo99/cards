@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.jaiwo99.cards.AbstractControllerTest;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.JiangRepository;
+import com.jaiwo99.cards.util.EntityGenerator;
 import com.jayway.jsonpath.JsonPath;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -36,9 +37,12 @@ public class JiangAdminRestControllerTest extends AbstractControllerTest {
     @Autowired
     private JiangRepository jiangRepository;
 
+    @Autowired
+    private EntityGenerator entityGenerator;
+
     @Test
     public void list_should_list_all_jiang() throws Exception {
-        generateJiang(10);
+        entityGenerator.generateJiang(10);
         final ResponseEntity<String> responseEntity = restTemplate.getForEntity(urlWrapper("/rest/admin/jiang/list"), String.class);
 
         List<String> payload = JsonPath.read(responseEntity.getBody(), "$.payload[*]");
@@ -71,7 +75,7 @@ public class JiangAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void save_should_be_able_to_update_jiang() throws Exception {
-        final Jiang jiang = generateJiang();
+        final Jiang jiang = entityGenerator.generateJiang();
 
         jiang.setName("newJiangName");
 
@@ -95,8 +99,8 @@ public class JiangAdminRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void remove_should_be_able_to_remove_jiang() throws Exception {
-        generateJiang(10);
-        final Jiang jiang = generateJiang();
+        entityGenerator.generateJiang(10);
+        final Jiang jiang = entityGenerator.generateJiang();
 
         assertThat(jiangRepository.findAll().size(), is(11));
 

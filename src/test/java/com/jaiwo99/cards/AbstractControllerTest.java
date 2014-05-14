@@ -1,6 +1,5 @@
 package com.jaiwo99.cards;
 
-import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
 import org.junit.After;
@@ -14,7 +13,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.Arrays;
-import java.util.UUID;
 
 /**
  * @author liang - jaiwo99@gmail.com
@@ -44,22 +42,10 @@ public abstract class AbstractControllerTest extends AbstractTest {
         cardDealRepository.deleteAll();
     }
 
-    protected void generateJiang(int count) {
-        while(count-- > 0) {
-            generateJiang();
-        }
-    }
-
     protected String urlWrapper(String suffix) {
         final String url = "http://" + host + ":" + serverPort + suffix;
         logger.debug("urlWrapper built URL: {}", url);
         return url;
-    }
-
-    protected Jiang generateJiang() {
-        final String name = randomName();
-        logger.debug("Generating Jiang[name:{}]", name);
-        return jiangRepository.save(new Jiang(name));
     }
 
     protected HttpHeaders jsonHeader() {
@@ -67,9 +53,5 @@ public abstract class AbstractControllerTest extends AbstractTest {
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         return headers;
-    }
-
-    private String randomName() {
-        return "generated-jiang:" + UUID.randomUUID().toString();
     }
 }

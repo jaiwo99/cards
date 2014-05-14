@@ -5,6 +5,7 @@ import com.jaiwo99.cards.domain.CardDeal;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
+import com.jaiwo99.cards.util.EntityGenerator;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,12 +33,15 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
     @Autowired
     private JiangRepository jiangRepository;
 
+    @Autowired
+    private EntityGenerator entityGenerator;
+
     @Value("${jiang.picking.count}")
     private String chooseCount;
 
     @Test
     public void reset_should_remove_all_jiang_in_jiangPicking_repo() throws Exception {
-        final Jiang jiang = generateJiang();
+        final Jiang jiang = entityGenerator.generateJiang();
 
         cardDealRepository.save(new CardDeal(jiang.getId(), PICKED));
 
@@ -50,8 +54,8 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void listNew_should_only_list_available_jiang() throws Exception {
-        generateJiang(10);
-        final Jiang jiang = generateJiang();
+        entityGenerator.generateJiang(10);
+        final Jiang jiang = entityGenerator.generateJiang();
 
         assertThat(jiangRepository.findAll().size(), is(11));
 
@@ -72,7 +76,7 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void listChosen_should_not_list_picked_jiang() throws Exception {
-        final Jiang jiangToBePicked = generateJiang();
+        final Jiang jiangToBePicked = entityGenerator.generateJiang();
 
         assertThat(jiangRepository.findAll().size(), is(1));
 
@@ -93,7 +97,7 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void listChosen_should_list_chosen_jiang() throws Exception {
-        generateJiang(10);
+        entityGenerator.generateJiang(10);
 
         final ResponseEntity<String> chooseEntity = restTemplate.postForEntity(urlWrapper("/rest/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
@@ -112,7 +116,7 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void listPicked_should_list_all_picked_jiang() throws Exception {
-        final Jiang jiang = generateJiang();
+        final Jiang jiang = entityGenerator.generateJiang();
 
         assertThat(jiangRepository.findAll().size(), is(1));
         assertThat(cardDealRepository.findAll().size(), is(0));
@@ -128,7 +132,7 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void choose_should_return_defined_count_of_jiang() throws Exception {
-        generateJiang(10);
+        entityGenerator.generateJiang(10);
 
         final ResponseEntity<String> responseEntity = restTemplate.postForEntity(urlWrapper("/rest/jiang/choose"), new HttpEntity<Void>(null, jsonHeader()), String.class);
 
@@ -139,8 +143,8 @@ public class JiangDealRestControllerTest extends AbstractControllerTest {
 
     @Test
     public void pick_should_create_entity_in_jiang_picking_repo() throws Exception {
-        generateJiang(10);
-        final Jiang jiang = generateJiang();
+        entityGenerator.generateJiang(10);
+        final Jiang jiang = entityGenerator.generateJiang();
 
         assertThat(cardDealRepository.findAll().size(), is(0));
 
