@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 
@@ -47,9 +46,9 @@ public class JiangDealController {
     }
 
     @RequestMapping(value = "/choose", method = POST)
-    public String choose(RedirectAttributes flash) {
-        flash.addAttribute("chooseView", jiangDealService.choose());
-        return "redirect: jiang/choose";
+    public String choose() {
+        jiangHolder.setSelection(jiangDealService.choose());
+        return "redirect:jiang/choose";
     }
 
     @RequestMapping(value = "/pick", method = POST)
@@ -62,6 +61,6 @@ public class JiangDealController {
         final Jiang jiang = jiangDealService.pick(jiangPickingCommand.getId());
         updateJiang(jiangHolder, jiang, jiangPickingCommand.getJiangType());
 
-        return "redirect: jiang/choose";
+        return "redirect:jiang/choose";
     }
 }
