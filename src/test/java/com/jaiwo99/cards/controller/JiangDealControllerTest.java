@@ -1,6 +1,7 @@
 package com.jaiwo99.cards.controller;
 
 import com.jaiwo99.cards.AbstractControllerTest;
+import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.util.EntityGenerator;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,9 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.hamcrest.Matchers.hasProperty;
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -59,6 +58,25 @@ public class JiangDealControllerTest extends AbstractControllerTest {
         mockMvc.perform(post("/jiang/choose")).
                 andExpect(request().sessionAttribute("scopedTarget.simpleJiangHolder", hasProperty("selection", hasSize(Integer.valueOf(jiangPickingCount))))).
                 andExpect(status().is(302)).
+                andExpect(redirectedUrl("jiang/choose"));
+    }
+
+    @Test
+    public void pick_should_recognize_validation_error() throws Exception {
+        mockMvc.perform(post("/jiang/pick")).
+                andExpect(model().hasErrors()).
+                andExpect(model().attributeHasFieldErrors("jiangPickingCommand", "id", "jiangType")).
+                andExpect(status().is(200)).
+                andExpect(view().name("jiang/choose"));
+    }
+
+    @Test
+    public void pick_should_pick_jiang_and_put_it_to_card_holder() throws Exception {
+        final Jiang jiang = entityGenerator.generateJiang();
+        mockMvc.perform(post("/jiang/pick").param("id", jiang.getId()).param("jiangType", "MAJOR")).
+                andExpect(status().is(302)).
+                andExpect(request().sessionAttribute("scopedTarget.simpleJiangHolder", hasProperty("major", hasProperty("id", equalTo(jiang.getId()))))).
+                andExpect(request().sessionAttribute("scopedTarget.simpleJiangHolder", hasProperty("major", hasProperty("name", equalTo(jiang.getName()))))).
                 andExpect(redirectedUrl("jiang/choose"));
     }
 
