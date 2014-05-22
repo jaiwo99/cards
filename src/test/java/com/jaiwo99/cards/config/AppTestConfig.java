@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
  * @author liang - jaiwo99@gmail.com
  */
 @Configuration
-@PropertySource("classpath:system.test.properties")
+@PropertySource("classpath:application.test.properties")
 public class AppTestConfig {
 
     @Value("${mongo.embedded.host}")
