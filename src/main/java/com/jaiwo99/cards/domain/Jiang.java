@@ -19,7 +19,9 @@ public class Jiang extends Card implements Serializable {
     }
 
     private String name;
-
+    private Integer hp;
+    private String skills;
+    
     public String getName() {
         return name;
     }
@@ -27,4 +29,21 @@ public class Jiang extends Card implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+	public Integer getHp() {
+		return hp;
+	}
+
+	public void setHp(Integer hp) {
+		this.hp = hp;
+	}
+
+	public String getSkills() {
+		return skills;
+	}
+
+	public void setSkills(String skills) {
+		this.skills = skills;
+	}
+
 }

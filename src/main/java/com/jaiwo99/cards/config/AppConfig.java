@@ -10,7 +10,7 @@ import org.springframework.web.client.RestTemplate;
  * @author liang - jaiwo99@gmail.com
  */
 @Configuration
-@PropertySource({"classpath:application.properties", "classpath:system.properties"})
+@PropertySource({"classpath:context.config.properties", "classpath:application.properties"})
 public class AppConfig {
 
     @Bean
