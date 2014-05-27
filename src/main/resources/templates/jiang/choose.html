@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8"/>
-    <title></title>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+        layout:decorator="layout">
+<head>
+    <title th:text="#{choose.title}">Choose</title>
 </head>
 <body>
-
+    <div class="container-fluid" layout:fragment="content">
+    </div>
 </body>
 </html>
