@@ -2,7 +2,6 @@ package com.jaiwo99.cards.service;
 
 import com.jaiwo99.cards.deal.JiangDealStrategy;
 import com.jaiwo99.cards.domain.Jiang;
-import com.jaiwo99.cards.repository.CardDealRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +15,6 @@ public class JiangDealServiceImpl implements JiangDealService {
 
     @Autowired
     private JiangDealStrategy jiangDealStrategy;
-
-    @Autowired
-    private CardDealRepository cardDealRepository;
-
 
     @Override
     public List<Jiang> choose() {
