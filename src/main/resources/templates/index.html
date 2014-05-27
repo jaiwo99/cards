@@ -3,9 +3,17 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Homepage</title>
+    <title th:text="#{home.title}">Homepage</title>
 </head>
 <body>
-Define homepage here
+<div class="jumbotron" layout:fragment="content">
+    <section>
+        <h1>TODO::</h1>
+        <p>TODO::::</p>
+    </section>
+    <section>
+        <a class="btn btn-lg btn-primary" href="#navbar" role="button" th:href="@{/}">TODO:::: &raquo;</a>
+    </section>
+</div>
 </body>
 </html>
