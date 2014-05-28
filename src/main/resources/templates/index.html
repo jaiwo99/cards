@@ -3,9 +3,19 @@
       xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
       layout:decorator="layout">
 <head>
-    <title>Homepage</title>
+    <title th:text="#{home.title}">Homepage</title>
 </head>
 <body>
-Define homepage here
+<div class="jumbotron" layout:fragment="content">
+    <section>
+        <h1 th:text="#{homepage.title}">Welcome</h1>
+        <p th:text="#{homepage.subtitle}">Description</p>
+    </section>
+    <section>
+        <form th:action="@{/jiang/choose}">
+            <button class="btn btn-lg btn-primary" href="#navbar" role="button" th:text="#{homepage.button.choose}" type="submit">Choose &raquo;</button>
+        </form>
+    </section>
+</div>
 </body>
 </html>
