@@ -1,6 +1,5 @@
 package com.jaiwo99.cards.deal;
 
-import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.domain.Role;
 
 import java.util.List;
@@ -12,7 +11,8 @@ public interface RoleDealStrategy {
 
     void reset();
 
-    Role pick(String id);
+    Role randomPick();
 
-    List<Jiang> choose();
+    List<Role> listRest();
+    
 }

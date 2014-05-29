@@ -7,6 +7,6 @@ import com.jaiwo99.cards.domain.Role;
  */
 public interface RoleDealService {
 
-    Role pick();
+    Role randomPick();
     void reset();
 }

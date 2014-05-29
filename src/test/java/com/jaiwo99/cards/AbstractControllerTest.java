@@ -2,6 +2,7 @@ package com.jaiwo99.cards;
 
 import com.jaiwo99.cards.repository.CardDealRepository;
 import com.jaiwo99.cards.repository.JiangRepository;
+import com.jaiwo99.cards.repository.RoleRepository;
 import org.junit.After;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,9 @@ public abstract class AbstractControllerTest extends AbstractTest {
 
     @Autowired
     private JiangRepository jiangRepository;
+    
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private CardDealRepository cardDealRepository;
@@ -39,6 +43,7 @@ public abstract class AbstractControllerTest extends AbstractTest {
     public void cleanUp() throws Exception {
         logger.debug("Doing clean up job after test");
         jiangRepository.deleteAll();
+        roleRepository.deleteAll();
         cardDealRepository.deleteAll();
     }
 

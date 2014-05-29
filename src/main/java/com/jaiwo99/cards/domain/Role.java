@@ -12,6 +12,10 @@ public class Role extends Card implements Serializable {
     
     private RoleType type;
 
+    public Role(RoleType type) {
+    	this.type = type;
+	}
+    
 	public RoleType getType() {
 		return type;
 	}
