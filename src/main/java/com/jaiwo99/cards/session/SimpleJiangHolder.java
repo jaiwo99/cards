@@ -2,6 +2,8 @@ package com.jaiwo99.cards.session;
 
 import com.google.common.collect.Lists;
 import com.jaiwo99.cards.domain.Jiang;
+import com.jaiwo99.cards.domain.Role;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -23,6 +25,8 @@ public class SimpleJiangHolder implements JiangHolder, Serializable {
     private Jiang major;
 
     private Jiang minor;
+    
+    private Role role;
 
     @Override
     public Jiang getMajor() {
@@ -53,4 +57,14 @@ public class SimpleJiangHolder implements JiangHolder, Serializable {
     public void setMinor(Jiang minor) {
         this.minor = minor;
     }
+
+	@Override
+	public Role getRole() {
+		return role;
+	}
+
+	@Override
+	public void setRole(Role role) {
+		this.role = role;		
+	}
 }
