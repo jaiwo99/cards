@@ -12,7 +12,7 @@
         <p th:text="#{homepage.subtitle}">Description</p>
     </section>
     <section>
-        <form th:action="@{/jiang/choose}">
+        <form th:action="@{/jiang/choose}" method="POST">
             <button class="btn btn-lg btn-primary" href="#navbar" role="button" th:text="#{homepage.button.choose}" type="submit">Choose &raquo;</button>
         </form>
     </section>
