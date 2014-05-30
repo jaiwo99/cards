@@ -47,7 +47,7 @@ public class Bootstrap {
         cardDealRepository.deleteAll();
         logger.debug("Clean up DB DONE...");
         jiangRepository.save(list);
-        logger.debug("added {} Jiang in DB");
+        logger.debug("added {} Jiangs in DB", list.size());
     }
 
     @PreDestroy
