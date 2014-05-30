@@ -52,10 +52,10 @@ public class JiangDealController {
     }
 
     @RequestMapping(value = "/pick", method = POST)
-    public String pick(@Valid JiangPickingCommand jiangPickingCommand, BindingResult result) {
+    public String pick(@Valid JiangPickingCommand jiangPickingCommand, BindingResult result, Model model) {
 
         if(result.hasErrors()) {
-            return "jiang/choose";
+            return chooseView(model);
         }
 
         final Jiang jiang = jiangDealService.pick(jiangPickingCommand.getId());

@@ -2,6 +2,7 @@ package com.jaiwo99.cards.session;
 
 import com.google.common.collect.Lists;
 import com.jaiwo99.cards.domain.Jiang;
+import org.apache.commons.lang3.Validate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -41,6 +42,7 @@ public class SimpleJiangHolder implements JiangHolder, Serializable {
 
     @Override
     public void setSelection(List<Jiang> selection) {
+        Validate.notNull("selection mustn't be set to NULL");
         this.selection = selection;
     }
 
