@@ -58,7 +58,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
         mockMvc.perform(post("/jiang/choose")).
                 andExpect(request().sessionAttribute("scopedTarget.simpleJiangHolder", hasProperty("selection", hasSize(Integer.valueOf(jiangPickingCount))))).
                 andExpect(status().is(302)).
-                andExpect(redirectedUrl("jiang/choose"));
+                andExpect(redirectedUrl("/jiang/choose"));
     }
 
     @Test
@@ -77,7 +77,7 @@ public class JiangDealControllerTest extends AbstractControllerTest {
                 andExpect(status().is(302)).
                 andExpect(request().sessionAttribute("scopedTarget.simpleJiangHolder", hasProperty("major", hasProperty("id", equalTo(jiang.getId()))))).
                 andExpect(request().sessionAttribute("scopedTarget.simpleJiangHolder", hasProperty("major", hasProperty("name", equalTo(jiang.getName()))))).
-                andExpect(redirectedUrl("jiang/choose"));
+                andExpect(redirectedUrl("/jiang/choose"));
     }
 
 }

@@ -48,7 +48,7 @@ public class JiangDealController {
     @RequestMapping(value = "/choose", method = POST)
     public String choose() {
         jiangHolder.setSelection(jiangDealService.choose());
-        return "redirect:jiang/choose";
+        return "redirect:/jiang/choose";
     }
 
     @RequestMapping(value = "/pick", method = POST)
@@ -61,6 +61,6 @@ public class JiangDealController {
         final Jiang jiang = jiangDealService.pick(jiangPickingCommand.getId());
         updateJiang(jiangHolder, jiang, jiangPickingCommand.getJiangType());
 
-        return "redirect:jiang/choose";
+        return "redirect:/jiang/choose";
     }
 }
