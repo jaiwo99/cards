@@ -6,7 +6,40 @@
     <title th:text="#{choose.title}">Choose</title>
 </head>
 <body>
-    <div class="container-fluid" layout:fragment="content">
+    <div layout:fragment="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3" th:each="jiang : ${chooseView.selection}">
+                    <div class="thumbnail">
+                        <img data-src="holder.js/100%x300"/>
+                        <div class="caption">
+                            <h5 th:text="${jiang.name}">Name</h5>
+                            <p th:text="${jiang.id}">jie shao</p>
+                            <p><b>TODO:</b> health</p>
+                            <p><b>TODO:</b> skill1</p>
+                            <p><b>TODO:</b> skill2</p>
+                            <p>
+                                <form id="pickMajorForm" th:action="@{/jiang/pick}" method="POST">
+                                    <input type="hidden" name="id" th:value="${jiang.id}"/>
+                                    <input type="hidden" name="jiangType" value="MAJOR"/>
+                                </form>
+                                <form id="pickMinorForm" th:action="@{/jiang/pick}" method="POST">
+                                    <input type="hidden" name="id" th:value="${jiang.id}"/>
+                                    <input type="hidden" name="jiangType" value="MINOR"/>
+                                </form>
+                                <button form="pickMajorForm" type="submit" href="#" th:text="#{choose.button.major}" class="btn btn-primary">Major</button>
+                                <button form="pickMinorForm" type="submit" href="#" th:text="#{choose.button.minor}" class="btn btn-success">Minor</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+        </div>
     </div>
+
 </body>
 </html>
