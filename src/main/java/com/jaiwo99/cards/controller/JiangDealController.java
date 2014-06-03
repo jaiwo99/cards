@@ -31,7 +31,7 @@ public class JiangDealController {
     @Autowired
     private JiangHolder jiangHolder;
 
-    @RequestMapping(value = "/", method = GET)
+    @RequestMapping(value = {"/", "/view"}, method = GET)
     public String view(Model model) {
         model.addAttribute("jiangView", new JiangView(jiangHolder.getMajor(), jiangHolder.getMinor()));
         return "jiang/view";
