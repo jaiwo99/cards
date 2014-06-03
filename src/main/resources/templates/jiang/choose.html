@@ -19,16 +19,16 @@
                             <p><b>TODO:</b> skill1</p>
                             <p><b>TODO:</b> skill2</p>
                             <p>
-                                <form id="pickMajorForm" th:action="@{/jiang/pick}" method="POST">
+                                <form th:id="|pickMajorForm_${jiang.id}|" th:action="@{/jiang/pick}" method="POST">
                                     <input type="hidden" name="id" th:value="${jiang.id}"/>
                                     <input type="hidden" name="jiangType" value="MAJOR"/>
                                 </form>
-                                <form id="pickMinorForm" th:action="@{/jiang/pick}" method="POST">
+                                <form th:id="|pickMinorForm_${jiang.id}|" th:action="@{/jiang/pick}" method="POST">
                                     <input type="hidden" name="id" th:value="${jiang.id}"/>
                                     <input type="hidden" name="jiangType" value="MINOR"/>
                                 </form>
-                                <button form="pickMajorForm" type="submit" href="#" th:text="#{choose.button.major}" class="btn btn-primary">Major</button>
-                                <button form="pickMinorForm" type="submit" href="#" th:text="#{choose.button.minor}" class="btn btn-success">Minor</button>
+                                <button th:form="|pickMajorForm_${jiang.id}|" type="submit" href="#" th:text="#{choose.button.major}" class="btn btn-primary">Major</button>
+                                <button th:form="|pickMinorForm_${jiang.id}|" type="submit" href="#" th:text="#{choose.button.minor}" class="btn btn-success">Minor</button>
                             </p>
                         </div>
                     </div>
