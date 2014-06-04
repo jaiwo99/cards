@@ -4,17 +4,17 @@ import com.jaiwo99.cards.command.JiangPickingCommand;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.service.JiangDealService;
 import com.jaiwo99.cards.session.JiangHolder;
+import com.jaiwo99.cards.session.JiangHolderUtil;
 import com.jaiwo99.cards.view.ChooseView;
 import com.jaiwo99.cards.view.JiangView;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
-import static com.jaiwo99.cards.session.JiangHolderUtil.updateJiang;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -25,11 +25,14 @@ import static org.springframework.web.bind.annotation.RequestMethod.POST;
 @RequestMapping("/jiang")
 public class JiangDealController {
 
-    @Autowired
+    @Inject
     private JiangDealService jiangDealService;
 
-    @Autowired
+    @Inject
     private JiangHolder jiangHolder;
+
+    @Inject
+    private JiangHolderUtil jiangHolderUtil;
 
     @RequestMapping(value = {"/", "/view"}, method = GET)
     public String view(Model model) {
@@ -59,7 +62,7 @@ public class JiangDealController {
         }
 
         final Jiang jiang = jiangDealService.pick(jiangPickingCommand.getId());
-        updateJiang(jiangHolder, jiang, jiangPickingCommand.getJiangType());
+        jiangHolderUtil.updateJiang(jiang, jiangPickingCommand.getJiangType());
 
         return "redirect:/jiang/choose";
     }
