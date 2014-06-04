@@ -10,9 +10,9 @@ import static com.jaiwo99.cards.domain.JiangType.MINOR;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
-public class JiangHolderUtilTest {
+public class JiangHolderHelperTest {
 
-    private JiangHolderUtil instance;
+    private JiangHolderHelper instance;
 
     private JiangHolder jiangHolder;
     private Jiang major;
@@ -25,7 +25,7 @@ public class JiangHolderUtilTest {
         minor = new Jiang("minor");
         jiangHolder.setMajor(major);
         jiangHolder.setMinor(minor);
-        instance = new JiangHolderUtil();
+        instance = new JiangHolderHelper();
         ReflectionTestUtils.setField(instance, "jiangHolder", jiangHolder);
         assertThat(jiangHolder.getMajor(), hasProperty("name", is("major")));
         assertThat(jiangHolder.getMinor(), hasProperty("name", is("minor")));
