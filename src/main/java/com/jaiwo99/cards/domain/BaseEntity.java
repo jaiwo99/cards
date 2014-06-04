@@ -8,7 +8,7 @@ import org.springframework.data.annotation.Id;
 public abstract class BaseEntity {
 
     @Id
-    private String id;
+    protected String id;
 
     public String getId() {
         return id;
