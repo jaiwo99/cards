@@ -1,6 +1,8 @@
 package com.jaiwo99.cards.session;
 
 import com.jaiwo99.cards.domain.Jiang;
+import com.jaiwo99.cards.domain.Kingdom;
+import com.jaiwo99.cards.domain.Skill;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
@@ -21,21 +23,23 @@ public class JiangHolderHelperTest {
     @Before
     public void setUp() {
         jiangHolder = new SimpleJiangHolder();
-        major = new Jiang("major");
-        minor = new Jiang("minor");
+        major = new Jiang("major", Kingdom.QUN, 3, null, new Skill());
+        major.setId("id1");
+        minor = new Jiang("minor", Kingdom.QUN, 3, null, new Skill());
+        minor.setId("id2");
         jiangHolder.setMajor(major);
         jiangHolder.setMinor(minor);
         instance = new JiangHolderHelper();
         ReflectionTestUtils.setField(instance, "jiangHolder", jiangHolder);
-        assertThat(jiangHolder.getMajor(), hasProperty("name", is("major")));
-        assertThat(jiangHolder.getMinor(), hasProperty("name", is("minor")));
+        assertThat(jiangHolder.getMajor(), hasProperty("name", is(major.getName())));
+        assertThat(jiangHolder.getMinor(), hasProperty("name", is(minor.getName())));
     }
 
     @Test
     public void swapJiangPosition_should_swap_major_and_minor() throws Exception {
         instance.swapJiangPosition();
-        assertThat(jiangHolder.getMajor(), hasProperty("name", is("minor")));
-        assertThat(jiangHolder.getMinor(), hasProperty("name", is("major")));
+        assertThat(jiangHolder.getMajor(), hasProperty("name", is(minor.getName())));
+        assertThat(jiangHolder.getMinor(), hasProperty("name", is(major.getName())));
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -50,22 +54,26 @@ public class JiangHolderHelperTest {
 
     @Test
     public void updateJiang_should_update_major() throws Exception {
-        instance.updateJiang(new Jiang("new_major"), MAJOR);
-        assertThat(jiangHolder.getMajor(), hasProperty("name", is("new_major")));
-        assertThat(jiangHolder.getMinor(), hasProperty("name", is("minor")));
+        final Jiang jiang = new Jiang("new_major", Kingdom.SHU, 3, "picname", new Skill());
+        jiang.setId("id4");
+        instance.updateJiang(jiang, MAJOR);
+        assertThat(jiangHolder.getMajor(), hasProperty("name", is(jiang.getName())));
+        assertThat(jiangHolder.getMinor(), hasProperty("name", is(minor.getName())));
     }
 
     @Test
     public void updateJiang_should_update_minor() throws Exception {
-        instance.updateJiang(new Jiang("new_minor"), MINOR);
-        assertThat(jiangHolder.getMajor(), hasProperty("name", is("major")));
-        assertThat(jiangHolder.getMinor(), hasProperty("name", is("new_minor")));
+        final Jiang jiang = new Jiang("new_minor", Kingdom.SHU, 3, "picname", new Skill());
+        jiang.setId("id5");
+        instance.updateJiang(jiang, MINOR);
+        assertThat(jiangHolder.getMajor(), hasProperty("name", is(major.getName())));
+        assertThat(jiangHolder.getMinor(), hasProperty("name", is(jiang.getName())));
     }
 
     @Test
     public void updateJiang_should_remove_minor_when_setting_major_to_minor() throws Exception {
         instance.updateJiang(minor, MAJOR);
-        assertThat(jiangHolder.getMajor(), hasProperty("name", is("minor")));
+        assertThat(jiangHolder.getMajor(), hasProperty("name", is(minor.getName())));
         assertThat(jiangHolder.getMinor(), is(nullValue()));
     }
 
@@ -73,7 +81,7 @@ public class JiangHolderHelperTest {
     public void updateJiang_should_remove_major_when_setting_minor_to_major() throws Exception {
         instance.updateJiang(major, MINOR);
         assertThat(jiangHolder.getMajor(), is(nullValue()));
-        assertThat(jiangHolder.getMinor(), hasProperty("name", is("major")));
+        assertThat(jiangHolder.getMinor(), hasProperty("name", is(major.getName())));
     }
 
 }
