@@ -4,7 +4,7 @@ import com.jaiwo99.cards.command.JiangPickingCommand;
 import com.jaiwo99.cards.domain.Jiang;
 import com.jaiwo99.cards.service.JiangDealService;
 import com.jaiwo99.cards.session.JiangHolder;
-import com.jaiwo99.cards.session.JiangHolderHelper;
+import com.jaiwo99.cards.session.JiangHolderAdapter;
 import com.jaiwo99.cards.view.ChooseView;
 import com.jaiwo99.cards.view.JiangView;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,7 @@ public class JiangDealController {
     private JiangHolder jiangHolder;
 
     @Inject
-    private JiangHolderHelper jiangHolderHelper;
+    private JiangHolderAdapter jiangHolderAdapter;
 
     @RequestMapping(value = {"/", "/view"}, method = GET)
     public String view(Model model) {
@@ -62,7 +62,7 @@ public class JiangDealController {
         }
 
         final Jiang jiang = jiangDealService.pick(jiangPickingCommand.getId());
-        jiangHolderHelper.updateJiang(jiang, jiangPickingCommand.getJiangType());
+        jiangHolderAdapter.updateJiang(jiang, jiangPickingCommand.getJiangType());
 
         return "redirect:/jiang/choose";
     }

@@ -11,7 +11,7 @@ import javax.inject.Named;
  * @author liang - jaiwo99@gmail.com
  */
 @Named
-public class JiangHolderHelper {
+public class JiangHolderAdapter {
 
     @Inject
     private JiangHolder jiangHolder;
