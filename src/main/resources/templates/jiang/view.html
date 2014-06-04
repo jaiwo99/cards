@@ -16,6 +16,7 @@
                 <div class="thumbnail" th:if="${jiangView.major} != null">
                     <img data-src="holder.js/100%x300"/>
                     <div class="caption">
+                        <h3 th:text="#{view.major.title}">Major</h3>
                         <h5 th:text="${jiangView.major.name}">Name</h5>
                         <p th:text="${jiangView.major.id}">jie shao</p>
                         <p><b>TODO:</b> health</p>
@@ -28,6 +29,7 @@
                 <div class="thumbnail" th:if="${jiangView.minor} != null">
                     <img data-src="holder.js/100%x300"/>
                     <div class="caption">
+                        <h3 th:text="#{view.minor.title}">Minor</h3>
                         <h5 th:text="${jiangView.minor.name}">Name</h5>
                         <p th:text="${jiangView.minor.id}">jie shao</p>
                         <p><b>TODO:</b> health</p>
