@@ -5,5 +5,5 @@ package com.jaiwo99.cards.domain;
  */
 public enum SkillType {
 
-    NORMAL, LIMITED, KING, PASSIVE
+    NORMAL, LIMITED, KING, PASSIVE, TRIGGERED
 }
